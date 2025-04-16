@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med&Dent - Cadastro de Tratamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4b2d83', // Roxo da logo
+                            hover: '#3b2266',
+                        },
+                        secondary: {
+                            DEFAULT: '#a02c2c', // Vermelho da logo
+                            hover: '#8a2424',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/logo.jpeg" alt="Med&Dent Logo" class="h-16">
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Administrador</span>
+                <a href="login.html" class="bg-secondary hover:bg-secondary-hover text-white px-3 py-1 rounded-md text-sm">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-[calc(100vh-76px)]">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md p-4">
+            <nav class="space-y-2">
+                <a href="index.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Dashboard
+                </a>
+                <a href="agenda.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Agenda
+                </a>
+                <a href="pacientes.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pacientes
+                </a>
+                <a href="tratamentos.html" class="block px-4 py-2 rounded-md bg-primary text-white font-medium">
+                    Tratamentos
+                </a>
+                <a href="dentistas.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Dentistas
+                </a>
+                <a href="pagamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pagamentos
+                </a>
+                <a href="relatorios.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Relatórios
+                </a>
+                <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Configurações
+                </a>
+            </nav>
+            
+            <!-- Seleção de Clínica -->
+            <div class="mt-8">
+                <h3 class="px-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Clínica</h3>
+                <div class="mt-2 space-y-1">
+                    <a href="#" class="block px-4 py-2 rounded-md bg-primary text-white font-medium">
+                        Filipe
+                    </a>
+                    <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                        Mosteiros
+                    </a>
+                    <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                        Ilha do Sal
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 p-6">
+            <div class="mb-6 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-gray-800">Cadastro de Tratamentos</h2>
+                <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-md text-sm flex items-center" onclick="openModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Novo Tratamento
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar</label>
+                        <input type="text" id="search" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Nome do tratamento...">
+                    </div>
+                    <div class="w-48">
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+                        <select id="category" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                            <option value="all">Todas</option>
+                            <option value="preventive">Preventivo</option>
+                            <option value="restorative">Restaurador</option>
+                            <option value="endodontic">Endodôntico</option>
+                            <option value="surgical">Cirúrgico</option>
+                            <option value="orthodontic">Ortodôntico</option>
+                            <option value="aesthetic">Estético</option>
+                        </select>
+                    </div>
+                    <div class="w-48">
+                        <label for="clinic" class="block text-sm font-medium text-gray-700 mb-1">Clínica</label>
+                        <select id="clinic" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                            <option value="all">Todas</option>
+                            <option value="filipe" selected>Filipe</option>
+                            <option value="mosteiros">Mosteiros</option>
+                            <option value="ilha-do-sal">Ilha do Sal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Tratamentos -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Código
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tratamento
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Categoria
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Valor (CVE)
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Duração
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                CONS001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Consulta Inicial</div>
+                                <div class="text-xs text-gray-500">Avaliação completa e plano de tratamento</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                    Preventivo
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                1.500
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                30 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                PROF001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Profilaxia</div>
+                                <div class="text-xs text-gray-500">Limpeza profissional</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                    Preventivo
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                2.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                45 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                REST001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Restauração Simples</div>
+                                <div class="text-xs text-gray-500">Resina composta - 1 face</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Restaurador
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                2.500
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                40 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                REST002
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Restauração Complexa</div>
+                                <div class="text-xs text-gray-500">Resina composta - 3 ou mais faces</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Restaurador
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                3.500
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                60 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                ENDO001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Tratamento Endodôntico</div>
+                                <div class="text-xs text-gray-500">Canal único</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    Endodôntico
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                6.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                90 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                ENDO002
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Tratamento Endodôntico</div>
+                                <div class="text-xs text-gray-500">Múltiplos canais</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    Endodôntico
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                8.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                120 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                EXTR001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Extração Simples</div>
+                                <div class="text-xs text-gray-500">Dente erupcionado</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    Cirúrgico
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                3.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                30 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                EXTR002
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Extração Cirúrgica</div>
+                                <div class="text-xs text-gray-500">Dente incluso ou impactado</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    Cirúrgico
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                5.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                60 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                PROT001
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Coroa Provisória</div>
+                                <div class="text-xs text-gray-500">Acrílico</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                    Protético
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                4.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                45 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                PROT002
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Coroa Definitiva</div>
+                                <div class="text-xs text-gray-500">Metalocerâmica</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                    Protético
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                12.000
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                60 min
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="#" class="text-primary hover:text-primary-hover mr-3" onclick="openEditModal()">Editar</a>
+                                <a href="#" class="text-gray-600 hover:text-gray-900">Detalhes</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginação -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-4 rounded-lg shadow-md">
+                <div class="flex-1 flex justify-between sm:hidden">
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Anterior
+                    </a>
+                    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Próximo
+                    </a>
+                </div>
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            Mostrando <span class="font-medium">1</span> a <span class="font-medium">10</span> de <span class="font-medium">24</span> resultados
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Anterior</span>
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="#" aria-current="page" class="z-10 bg-primary border-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                1
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                2
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                3
+                            </a>
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Próximo</span>
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Novo Tratamento -->
+    <div id="treatmentModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Novo Tratamento</h3>
+                    <button type="button" class="text-gray-400 hover:text-gray-500" onclick="closeModal()">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="px-6 py-4">
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="col-span-1">
+                            <label for="treatment-code" class="block text-sm font-medium text-gray-700 mb-1">Código</label>
+                            <input type="text" id="treatment-code" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Ex: CONS001">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="treatment-category" class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+                            <select id="treatment-category" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                                <option value="">Selecione uma categoria</option>
+                                <option value="preventive">Preventivo</option>
+                                <option value="restorative">Restaurador</option>
+                                <option value="endodontic">Endodôntico</option>
+                                <option value="surgical">Cirúrgico</option>
+                                <option value="prosthetic">Protético</option>
+                                <option value="orthodontic">Ortodôntico</option>
+                                <option value="aesthetic">Estético</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="treatment-name" class="block text-sm font-medium text-gray-700 mb-1">Nome do Tratamento</label>
+                            <input type="text" id="treatment-name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Ex: Consulta Inicial">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="treatment-description" class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                            <textarea id="treatment-description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Descreva o tratamento..."></textarea>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="treatment-value" class="block text-sm font-medium text-gray-700 mb-1">Valor (CVE)</label>
+                            <input type="number" id="treatment-value" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Ex: 2000">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="treatment-duration" class="block text-sm font-medium text-gray-700 mb-1">Duração (minutos)</label>
+                            <input type="number" id="treatment-duration" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Ex: 30">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="treatment-materials" class="block text-sm font-medium text-gray-700 mb-1">Materiais Necessários</label>
+                            <textarea id="treatment-materials" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" placeholder="Liste os materiais necessários..."></textarea>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Clínicas Disponíveis</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="clinic-filipe" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                                    <label for="clinic-filipe" class="ml-2 text-sm text-gray-700">Filipe</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="clinic-mosteiros" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                                    <label for="clinic-mosteiros" class="ml-2 text-sm text-gray-700">Mosteiros</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="clinic-ilha-do-sal" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                                    <label for="clinic-ilha-do-sal" class="ml-2 text-sm text-gray-700">Ilha do Sal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
+                <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium mr-2" onclick="closeModal()">
+                    Cancelar
+                </button>
+                <button type="button" class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-md text-sm font-medium" onclick="saveTreatment()">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-500">
+                © 2025 Med&Dent - Sistema de Gestão para Clínicas Odontológicas
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function openModal() {
+            document.getElementById('treatmentModal').classList.remove('hidden');
+            document.getElementById('modalTitle').textContent = 'Novo Tratamento';
+            // Limpar formulário
+            document.getElementById('treatment-code').value = '';
+            document.getElementById('treatment-name').value = '';
+            document.getElementById('treatment-description').value = '';
+            document.getElementById('treatment-value').value = '';
+            document.getElementById('treatment-duration').value = '';
+            document.getElementById('treatment-materials').value = '';
+        }
+
+        function openEditModal() {
+            document.getElementById('treatmentModal').classList.remove('hidden');
+            document.getElementById('modalTitle').textContent = 'Editar Tratamento';
+            // Preencher formulário com dados do tratamento selecionado (exemplo)
+            document.getElementById('treatment-code').value = 'CONS001';
+            document.getElementById('treatment-category').value = 'preventive';
+            document.getElementById('treatment-name').value = 'Consulta Inicial';
+            document.getElementById('treatment-description').value = 'Avaliação completa e plano de tratamento';
+            document.getElementById('treatment-value').value = '1500';
+            document.getElementById('treatment-duration').value = '30';
+            document.getElementById('treatment-materials').value = 'Kit básico de exame';
+        }
+
+        function closeModal() {
+            document.getElementById('treatmentModal').classList.add('hidden');
+        }
+
+        function saveTreatment() {
+            // Aqui seria implementada a lógica para salvar o tratamento
+            alert('Tratamento salvo com sucesso!');
+            closeModal();
+        }
+    </script>
+</body>
+</html>

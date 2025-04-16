@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med&Dent - Sistema de Gestão para Clínicas Odontológicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4b2d83', // Roxo da logo
+                            hover: '#3b2266',
+                        },
+                        secondary: {
+                            DEFAULT: '#a02c2c', // Vermelho da logo
+                            hover: '#8a2424',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/logo.jpeg" alt="Med&Dent Logo" class="h-16">
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Administrador</span>
+                <a href="login.html" class="bg-secondary hover:bg-secondary-hover text-white px-3 py-1 rounded-md text-sm">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-[calc(100vh-76px)]">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md p-4">
+            <nav class="space-y-2">
+                <a href="index.html" class="block px-4 py-2 rounded-md bg-primary text-white font-medium">
+                    Dashboard
+                </a>
+                <a href="agenda.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Agenda
+                </a>
+                <a href="pacientes.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pacientes
+                </a>
+                <a href="tratamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Tratamentos
+                </a>
+                <a href="pagamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pagamentos
+                </a>
+                <a href="relatorios.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Relatórios
+                </a>
+                <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Configurações
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 p-6">
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Visão Geral</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Consultas Hoje</h3>
+                        <p class="text-3xl font-bold text-primary">8</p>
+                        <div class="mt-4 text-sm text-gray-500">
+                            <span class="text-green-500 font-medium">6 confirmadas</span> • 2 pendentes
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Resumo Financeiro</h3>
+                        <p class="text-3xl font-bold text-green-600">R$ 2.450,00</p>
+                        <div class="mt-4 text-sm text-gray-500">
+                            <span class="text-green-500 font-medium">+12%</span> em relação à semana anterior
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Pacientes Ativos</h3>
+                        <p class="text-3xl font-bold text-primary">142</p>
+                        <div class="mt-4 text-sm text-gray-500">
+                            <span class="text-green-500 font-medium">+3</span> novos esta semana
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ações Rápidas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <a href="agenda.html" class="bg-primary hover:bg-primary-hover text-white p-4 rounded-lg shadow-md flex flex-col items-center">
+                        <span class="text-lg mb-1">Nova Consulta</span>
+                        <span class="text-xs">Agendar atendimento</span>
+                    </a>
+                    <a href="pacientes.html" class="bg-secondary hover:bg-secondary-hover text-white p-4 rounded-lg shadow-md flex flex-col items-center">
+                        <span class="text-lg mb-1">Novo Paciente</span>
+                        <span class="text-xs">Cadastrar paciente</span>
+                    </a>
+                    <a href="tratamentos.html" class="bg-primary hover:bg-primary-hover text-white p-4 rounded-lg shadow-md flex flex-col items-center">
+                        <span class="text-lg mb-1">Registrar Tratamento</span>
+                        <span class="text-xs">Adicionar procedimento</span>
+                    </a>
+                    <a href="pagamentos.html" class="bg-secondary hover:bg-secondary-hover text-white p-4 rounded-lg shadow-md flex flex-col items-center">
+                        <span class="text-lg mb-1">Registrar Pagamento</span>
+                        <span class="text-xs">Adicionar recebimento</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Próximas Consultas</h2>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="font-medium">Maria Silva</p>
+                            <p class="text-sm text-gray-500">Hoje, 10:30 - Limpeza</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="font-medium">João Oliveira</p>
+                            <p class="text-sm text-gray-500">Hoje, 11:15 - Avaliação</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="font-medium">Ana Pereira</p>
+                            <p class="text-sm text-gray-500">Hoje, 14:00 - Restauração</p>
+                        </div>
+                        <div class="border-l-4 border-gray-300 pl-4 py-2">
+                            <p class="font-medium">Carlos Santos</p>
+                            <p class="text-sm text-gray-500">Amanhã, 09:00 - Canal</p>
+                        </div>
+                        <div class="border-l-4 border-gray-300 pl-4 py-2">
+                            <p class="font-medium">Juliana Costa</p>
+                            <p class="text-sm text-gray-500">Amanhã, 10:45 - Extração</p>
+                        </div>
+                    </div>
+                    <a href="agenda.html" class="mt-4 text-primary hover:text-primary-hover text-sm font-medium">
+                        Ver agenda completa →
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Desempenho Mensal</h2>
+                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-md">
+                        <div class="w-full px-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Consultas</span>
+                                <span class="text-sm font-medium">120</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Tratamentos</span>
+                                <span class="text-sm font-medium">95</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 70%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Receita</span>
+                                <span class="text-sm font-medium">R$ 28.500,00</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-600 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Novos Pacientes</span>
+                                <span class="text-sm font-medium">18</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="relatorios.html" class="mt-4 text-primary hover:text-primary-hover text-sm font-medium">
+                        Ver relatórios detalhados →
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-500">
+                © 2025 Med&Dent - Sistema de Gestão para Clínicas Odontológicas
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med&Dent - Relatórios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "#4b2d83", // Roxo da logo
+                            hover: "#3b2266",
+                        },
+                        secondary: {
+                            DEFAULT: "#a02c2c", // Vermelho da logo
+                            hover: "#8a2424",
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/logo.jpeg" alt="Med&Dent Logo" class="h-16">
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Administrador</span>
+                <a href="login.html" class="bg-secondary hover:bg-secondary-hover text-white px-3 py-1 rounded-md text-sm">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-[calc(100vh-76px)]">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md p-4">
+            <nav class="space-y-2">
+                <a href="index.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Dashboard
+                </a>
+                <a href="agenda.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Agenda
+                </a>
+                <a href="pacientes.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pacientes
+                </a>
+                <a href="tratamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Tratamentos
+                </a>
+                <a href="pagamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pagamentos
+                </a>
+                <a href="relatorios.html" class="block px-4 py-2 rounded-md bg-primary-100 text-primary font-medium">
+                    Relatórios
+                </a>
+                <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Configurações
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 p-6">
+            <div class="mb-6 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-gray-800">Relatórios</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-md text-sm flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">Desempenho Financeiro</h3>
+                        <div class="flex space-x-2">
+                            <select class="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm">
+                                <option>Últimos 30 dias</option>
+                                <option>Últimos 90 dias</option>
+                                <option>Este ano</option>
+                                <option>Ano anterior</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-md">
+                        <div class="w-full px-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Janeiro</span>
+                                <span class="text-sm font-medium">R$ 18.500</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Fevereiro</span>
+                                <span class="text-sm font-medium">R$ 22.300</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 78%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Março</span>
+                                <span class="text-sm font-medium">R$ 25.800</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Abril</span>
+                                <span class="text-sm font-medium">R$ 28.500</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center text-sm">
+                        <span class="text-gray-500">Total do Período:</span>
+                        <span class="font-bold text-green-600">R$ 95.100,00</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">Tratamentos por Categoria</h3>
+                        <div class="flex space-x-2">
+                            <select class="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm">
+                                <option>Este mês</option>
+                                <option>Último trimestre</option>
+                                <option>Este ano</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-md">
+                        <div class="w-full px-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Limpeza</span>
+                                <span class="text-sm font-medium">32</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-600 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Restauração</span>
+                                <span class="text-sm font-medium">28</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-purple-600 h-2.5 rounded-full" style="width: 70%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Canal</span>
+                                <span class="text-sm font-medium">15</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-amber-600 h-2.5 rounded-full" style="width: 38%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Extração</span>
+                                <span class="text-sm font-medium">12</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-red-600 h-2.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center text-sm">
+                        <span class="text-gray-500">Total de Tratamentos:</span>
+                        <span class="font-bold text-primary">87</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">Comparação entre Clínicas</h3>
+                        <div class="flex space-x-2">
+                            <select class="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm">
+                                <option>Receita</option>
+                                <option>Pacientes</option>
+                                <option>Tratamentos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-md">
+                        <div class="w-full px-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Clínica Centro</span>
+                                <span class="text-sm font-medium">R$ 42.800</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Clínica Norte</span>
+                                <span class="text-sm font-medium">R$ 38.500</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-600 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Clínica Sul</span>
+                                <span class="text-sm font-medium">R$ 32.200</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-purple-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">Clínica Leste</span>
+                                <span class="text-sm font-medium">R$ 28.900</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-amber-600 h-2.5 rounded-full" style="width: 68%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center text-sm">
+                        <span class="text-gray-500">Total Geral:</span>
+                        <span class="font-bold text-green-600">R$ 142.400,00</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">Novos Pacientes</h3>
+                        <div class="flex space-x-2">
+                            <select class="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm">
+                                <option>Este ano</option>
+                                <option>Último ano</option>
+                                <option>Últimos 2 anos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-md">
+                        <div class="w-full px-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">1º Trimestre</span>
+                                <span class="text-sm font-medium">28</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 70%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">2º Trimestre</span>
+                                <span class="text-sm font-medium">35</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 88%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">3º Trimestre</span>
+                                <span class="text-sm font-medium">40</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between mb-2 mt-4">
+                                <span class="text-sm text-gray-500">4º Trimestre</span>
+                                <span class="text-sm font-medium">32</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center text-sm">
+                        <span class="text-gray-500">Total de Novos Pacientes:</span>
+                        <span class="font-bold text-primary">135</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-800">Opções de Exportação</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span class="text-sm font-medium">Exportar como PDF</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span class="text-sm font-medium">Exportar como Excel</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span class="text-sm font-medium">Enviar por Email</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-500">
+                © 2025 Med&Dent - Sistema de Gestão para Clínicas Odontológicas
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

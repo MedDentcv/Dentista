@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med&Dent - Pagamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "#4b2d83", // Roxo da logo
+                            hover: "#3b2266",
+                        },
+                        secondary: {
+                            DEFAULT: "#a02c2c", // Vermelho da logo
+                            hover: "#8a2424",
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/logo.jpeg" alt="Med&Dent Logo" class="h-16">
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Administrador</span>
+                <a href="login.html" class="bg-secondary hover:bg-secondary-hover text-white px-3 py-1 rounded-md text-sm">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-[calc(100vh-76px)]">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md p-4">
+            <nav class="space-y-2">
+                <a href="index.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Dashboard
+                </a>
+                <a href="agenda.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Agenda
+                </a>
+                <a href="pacientes.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Pacientes
+                </a>
+                <a href="tratamentos.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Tratamentos
+                </a>
+                <a href="pagamentos.html" class="block px-4 py-2 rounded-md bg-primary-100 text-primary font-medium">
+                    Pagamentos
+                </a>
+                <a href="relatorios.html" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Relatórios
+                </a>
+                <a href="#" class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    Configurações
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 p-6">
+            <div class="mb-6 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-gray-800">Pagamentos</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-md text-sm flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Novo Pagamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="relative w-64">
+                        <input type="text" placeholder="Buscar pagamento..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <div class="absolute left-3 top-2.5 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <select class="bg-white border border-gray-300 rounded-md px-3 py-2 text-sm">
+                            <option>Todos os Métodos</option>
+                            <option>Dinheiro</option>
+                            <option>Cartão de Crédito</option>
+                            <option>Cartão de Débito</option>
+                            <option>Transferência</option>
+                            <option>PIX</option>
+                        </select>
+                        <select class="bg-white border border-gray-300 rounded-md px-3 py-2 text-sm">
+                            <option>Todas as Clínicas</option>
+                            <option>Clínica Centro</option>
+                            <option>Clínica Norte</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Paciente
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tratamento
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Data
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Método
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Valor
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Ações
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <span class="text-primary font-medium">MS</span>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Maria Silva</div>
+                                            <div class="text-sm text-gray-500">ID: #1001</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">Limpeza</div>
+                                    <div class="text-sm text-gray-500">15/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">15/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Cartão de Crédito</div>
+                                    <div class="text-sm text-gray-500">Visa (final 4321)</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    R$ 150,00
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-primary hover:text-blue-900 mr-3">Ver</a>
+                                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">Recibo</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
+                                            <span class="text-green-600 font-medium">JO</span>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">João Oliveira</div>
+                                            <div class="text-sm text-gray-500">ID: #1002</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">Restauração</div>
+                                    <div class="text-sm text-gray-500">10/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">10/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Dinheiro</div>
+                                    <div class="text-sm text-gray-500">À vista</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    R$ 250,00
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-primary hover:text-blue-900 mr-3">Ver</a>
+                                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">Recibo</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                            <span class="text-purple-600 font-medium">AP</span>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Ana Pereira</div>
+                                            <div class="text-sm text-gray-500">ID: #1003</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">Avaliação</div>
+                                    <div class="text-sm text-gray-500">05/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">05/04/2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">PIX</div>
+                                    <div class="text-sm text-gray-500">Transferência</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    R$ 100,00
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-primary hover:text-blue-900 mr-3">Ver</a>
+                                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">Recibo</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Mostrando <span class="font-medium">1</span> a <span class="font-medium">3</span> de <span class="font-medium">42</span> resultados
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50" disabled>
+                            Anterior
+                        </button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
+                            Próximo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Resumo Financeiro</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Total Recebido (Mês Atual)</span>
+                            <span class="text-xl font-bold text-green-600">R$ 12.450,00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Total Pendente</span>
+                            <span class="text-xl font-bold text-amber-600">R$ 5.800,00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Média por Paciente</span>
+                            <span class="text-xl font-bold text-primary">R$ 320,00</span>
+                        </div>
+                        <div class="h-px bg-gray-200 my-2"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 font-medium">Previsão (Próximo Mês)</span>
+                            <span class="text-xl font-bold text-purple-600">R$ 15.200,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Métodos de Pagamento</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <div class="min-w-[120px] flex justify-between">
+                                <span class="text-sm text-gray-600">Cartão de Crédito</span>
+                                <span class="text-sm font-medium">45%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                <div class="bg-green-600 h-2.5 rounded-full" style="width: 25%"></div>
+                            </div>
+                            <div class="min-w-[120px] flex justify-between">
+                                <span class="text-sm text-gray-600">Dinheiro</span>
+                                <span class="text-sm font-medium">25%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                <div class="bg-purple-600 h-2.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                            <div class="min-w-[120px] flex justify-between">
+                                <span class="text-sm text-gray-600">PIX</span>
+                                <span class="text-sm font-medium">20%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                <div class="bg-amber-600 h-2.5 rounded-full" style="width: 10%"></div>
+                            </div>
+                            <div class="min-w-[120px] flex justify-between">
+                                <span class="text-sm text-gray-600">Outros</span>
+                                <span class="text-sm font-medium">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-500">
+                © 2025 Med&Dent - Sistema de Gestão para Clínicas Odontológicas
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
